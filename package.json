@@ -12,7 +12,9 @@
     "eslint-plugin-cypress": "^2.11.1"
   },
   "scripts": {
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "build": "docker-compose build",
+    "up": "docker-compose up --abort-on-container-exit --exit-code-from e2e"
   },
   "repository": {
     "type": "git",

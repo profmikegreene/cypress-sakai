@@ -9,7 +9,7 @@ describe('Logging In - Instructor', function () {
       // we must have a valid session cookie to be logged
       // in else we are redirected to /unauthorized
       cy.visit('/portal/site/!admin')
-      cy.injectAxe()
+      // cy.injectAxe()
       cy.get('h1').should(
         'contain',
         'Login Required'
@@ -20,7 +20,7 @@ describe('Logging In - Instructor', function () {
   context('HTML form submission', function () {
     beforeEach(function () {
       cy.visit('/portal/')
-      cy.injectAxe()
+      // cy.injectAxe()
     })
 
     it('displays errors on login', function () {
