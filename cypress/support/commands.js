@@ -90,6 +90,20 @@ Cypress.Commands.add("createRubric", (instructor, sakaiUrl) => {
   cy.get('.add-rubric').click();
 });
 
+Cypress.Commands.add('getIframeBody', (selector) => {
+  // get the iframe > document > body
+  // and retry until the body element is not empty
+  cy.log('getIframeBody')
+
+  return cy
+  .get(selector, { log: false })
+  .its('0.contentDocument.body', { log: false }).should('not.to.be.undefined')
+  // wraps "body" DOM element to allow
+  // chaining more Cypress commands, like ".find(...)"
+  // https://on.cypress.io/wrap
+  .then((body) => cy.wrap(body, { log: false }))
+});
+
 //
 //
 // -- This is a child command --

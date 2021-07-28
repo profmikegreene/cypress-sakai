@@ -1,8 +1,6 @@
-
+import sakai from '../../fixtures/sakai.json'
 describe('Logging In - Instructor', function () {
   // we can use these values to log in
-  const username = 'instructor1'
-  const password = 'sakai'
 
   context('Unauthorized', function () {
     it('is forced to auth when no session', function () {
@@ -38,15 +36,15 @@ describe('Logging In - Instructor', function () {
     })
 
     it('redirects to /portal on success', function () {
-      cy.get('input[name=eid]').type(username)
-      cy.get('input[name=pw]').type(password + '{enter}')
+      cy.get('input[name=eid]').type(`${sakai.username}`)
+      cy.get('input[name=pw]').type(`${sakai.password}` + '{enter}')
 
       // we should be redirected to /portal
       cy.url().should('include', '/portal')
-      cy.get('.Mrphs-userNav__subnav').should('contain', username)
+      cy.get('.Mrphs-userNav__subnav').should('contain', sakai.username)
 
       // and our cookie should be set to SAKAIID
-      cy.getCookie('SAKAIID').should('exist')
+      cy.getCookie(`${sakai.cookie}`).should('exist')
     })
   })
 
@@ -66,13 +64,13 @@ describe('Logging In - Instructor', function () {
         url: '/portal/', // baseUrl will be prepended to this url
         form: true, // indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
         body: {
-          username,
-          password,
+          username: sakai.username,
+          password: sakai.password,
         },
       })
 
       // just to prove we have a session
-      cy.getCookie('SAKAIID').should('exist')
+      cy.getCookie(`${sakai.cookie}`).should('exist')
     })
   })
 
@@ -80,17 +78,17 @@ describe('Logging In - Instructor', function () {
 
     beforeEach(function () {
       // login before each test
-      cy.sakaiLogin(username)
+      cy.sakaiLogin(sakai.username)
     })
 
     it('can visit /portal', function () {
       // after cy.request, the session cookie has been set
       // and we can visit a protected page
       cy.visit('/portal/')
-      cy.get('.Mrphs-userNav__subnav').should('contain', username)
+      cy.get('.Mrphs-userNav__subnav').should('contain', sakai.username)
 
       // or another protected page
-      cy.visit('/portal/site/~' + username)
+      cy.visit(`/portal/site/~${sakai.username}`)
       cy.get('.Mrphs-toolsNav__menuitem--title').should('contain', 'Preferences')
     })
 

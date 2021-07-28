@@ -13,7 +13,8 @@ services:
     environment:
       - CYPRESS_baseUrl=http://sakai.localhost
       - DISPLAY
-    command: npx cypress open
+    entrypoint: npx cypress open
+    # command: npx cypress open --headed
     # mount the host directory cypress and the file cypress.json as
     # volumes within the container
     # this means that:
