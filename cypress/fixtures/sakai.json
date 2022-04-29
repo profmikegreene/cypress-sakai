@@ -1,8 +1,15 @@
 {
     "cookie": "SAKAI2SESSIONID",
     "username": "instructor",
+    "siteId": "cypress-testing",
+    "siteTitle": "Cypress Testing",
     "password": "sakai",
+    "permissions": "Permissions",
     "permissionsLabel": "Set permissions for",
+    "permissionsLabelWaiting": "Waiting for permissions",
     "settingsLabel": "General Settings",
-    "draftLabel": "This topic is a draft"
+    "draftLabel": "This topic is a draft",
+    "manageTags": "Manage Tags",
+    "postToGroupsWarning": "This topic is only visible to certain groups",
+    "postToInstructorsWarning": "This topic is only visible to instructors"
 }

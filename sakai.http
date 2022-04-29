@@ -1,0 +1,87 @@
+POST http://sakai.localhost/direct/session.json
+    ?_username=admin
+    &_password=admin
+
+###
+
+POST http://sakai.localhost/direct/site.json HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": "sample-1",
+    "type": "course",
+    "title": "Sample Site 1",
+    "owner": "instructor",
+    "published": true,
+}
+
+###
+
+POST http://sakai.localhost/sakai-ws/rest/login/login?id=admin&pw=admin
+###
+
+
+
+GET http://sakai.localhost/sakai-ws/rest/sakai/addToolAndPageToSite
+?sessionid=8fa770ef-5b82-40c5-b844-169d4186480c
+&siteid=sample-1
+&toolid=sakai.conversations
+&pagetitle=Conversations
+&tooltitle=Conversations
+&pagelayout=0
+&position=0
+&popup=false
+
+GET http://sakai.localhost/sakai-ws/rest/sakai/addToolAndPageToSite
+?sessionid=8fa770ef-5b82-40c5-b844-169d4186480c
+&siteid=sample-1
+&toolid=sakai.siteinfo
+&pagetitle=Site%20Info
+&tooltitle=Site%20Info
+&pagelayout=0
+&position=1
+&popup=false
+###
+
+PUT http://sakai.localhost/direct/site/sample-1.json HTTP/1.1
+Content-Type: application/json
+
+{
+    "sitePages": [
+        {
+            "config": true,
+            "props": true,
+            "layout": 0,
+            "layoutTitle": "Single Column Layout",
+            "id": "conversations",
+            "position": 0,
+            "title": "Conversations",
+            "tools": [
+            {
+                "toolId": "sakai.conversations",
+                "pageOrder": 1,
+                "description": "Sakai Conversations Tool",
+                "title": "Conversations",
+            }
+            ],
+        },
+    ]
+}
+###
+
+GET http://sakai.localhost/direct/site/sample-1.json HTTP/1.1
+
+###
+GET http://sakai.localhost/direct/site/sample-1/pages.json HTTP/1.1
+
+###
+ 
+GET http://sakai.localhost/direct/site/NBKV_974E_4401/pages.json HTTP/1.1
+###
+
+DELETE http://sakai.localhost/direct/site/sample-1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "softlyDeleted": false
+}

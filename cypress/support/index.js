@@ -17,5 +17,12 @@
 import './commands'
 // import 'cypress-axe'
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // stop webcomponents/tool/src/main/frontend/js/sakai-i18n.js:27 from causing test failure
+    if (err.message.includes('window.parent.portal')) {
+        return false
+      }
+  })
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

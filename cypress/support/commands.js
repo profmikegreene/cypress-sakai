@@ -8,6 +8,7 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 //
+import sakai from '../fixtures/sakai.json';
 
 Cypress.Commands.add('sakaiLogin', (username) => {
 
@@ -22,7 +23,7 @@ Cypress.Commands.add('sakaiLogin', (username) => {
     form: true,
     body: {
       eid: username,
-      pw: (username === 'admin' ? 'admin' : 'sakai'),
+      pw: (username === 'admin' ? 'admin' : sakai.password),
     },
   })
 });
